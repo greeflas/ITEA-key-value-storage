@@ -1,0 +1,24 @@
+{
+    "name": "greeflas/php-key-value-storage",
+    "description": "PHP implementations of key value storage",
+    "keywords": ["php", "key-value", "storage"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "greeflas",
+            "email": "vldmr.kuprienko@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.1.0",
+        "symfony/yaml": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Greeflas\\Storage\\": "src/"
+        }
+    }
+}
