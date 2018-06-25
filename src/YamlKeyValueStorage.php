@@ -8,14 +8,14 @@ class YamlKeyValueStorage extends AbstractFileKeyValueStorage
 {
     protected function load(): array
     {
-        $data = Yaml::parseFile($this->file, Yaml::PARSE_OBJECT);
+        $data = Yaml::parseFile($this->file);
 
         return \is_array($data) ? $data : [];
     }
 
     protected function update(array $data): void
     {
-        $yaml = Yaml::dump($data, 2, 2, Yaml::DUMP_OBJECT);
+        $yaml = Yaml::dump($data);
         \file_put_contents($this->file, $yaml, \LOCK_EX);
     }
 }

@@ -32,7 +32,7 @@ abstract class AbstractFileKeyValueStorage implements KeyValueStorageInterface
     public function set(string $key, $value): void
     {
         $data = $this->load();
-        $data[$key] = $value;
+        $data[$key] = \is_object($value) ? \serialize($value) : $value;
         $this->update($data);
     }
 
@@ -41,7 +41,13 @@ abstract class AbstractFileKeyValueStorage implements KeyValueStorageInterface
         $data = $this->load();
 
         if (isset($data[$key])) {
-            return $data[$key];
+            $value = $data[$key];
+
+            if (\is_string($value) && $object = @\unserialize($value)) {
+                return $object;
+            }
+
+            return $value;
         }
 
         return null;

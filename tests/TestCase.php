@@ -23,14 +23,14 @@ abstract class TestCase
     protected function assertEquals($expected, $actual)
     {
         if ($actual === $expected) {
-            echo sprintf("%s is OK!\n", __METHOD__);
+            echo sprintf("%s is OK!\n", static::class);
 
             return;
         }
 
         echo \sprintf(
             "%s failed assert that '%s' equals '%s'\n",
-            __METHOD__,
+            static::class,
             \var_export($expected, true),
             \var_export($actual, true)
         );

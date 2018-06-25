@@ -19,7 +19,7 @@ class JsonKeyValueStorageTest extends TestCase
         $this->assertEquals('June 24', $this->storage->get('date'));
 
         $this->storage->set('date', 'July 25');
-        $this->assertEquals('July 25', $this->storage->get('data'));
+        $this->assertEquals('July 25', $this->storage->get('date'));
     }
 
     public function testGet()
