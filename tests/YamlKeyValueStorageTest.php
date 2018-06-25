@@ -17,6 +17,9 @@ class YamlKeyValueStorageTest extends TestCase
     {
         $this->storage->set('date', 'June 25');
         $this->assertEquals('June 25', $this->storage->get('date'));
+
+        $this->storage->set('date', 'August 31');
+        $this->assertEquals('August 31', $this->storage->get('date'));
     }
 
     public function testGet()

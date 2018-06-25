@@ -3,12 +3,16 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use Greeflas\Storage\Tests\InMemoryKeyValueStorageTest;
 use Greeflas\Storage\Tests\JsonKeyValueStorageTest;
 use Greeflas\Storage\Tests\YamlKeyValueStorageTest;
 
 $storageType = $argv[1] ?? null;
 
 switch ($storageType) {
+    case 'in-memory':
+        InMemoryKeyValueStorageTest::run();
+        break;
     case 'json':
         JsonKeyValueStorageTest::run();
         break;
