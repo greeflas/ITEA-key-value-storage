@@ -3,54 +3,79 @@
 namespace Greeflas\Storage\Tests;
 
 use Greeflas\Storage\InMemoryKeyValueStorage;
+use Greeflas\Storage\KeyValueStorageInterface;
+use PHPUnit\Framework\TestCase;
 
 class InMemoryKeyValueStorageTest extends TestCase
 {
+    /**
+     * @var KeyValueStorageInterface
+     */
     private $storage;
 
-    public function __construct()
+    protected function setUp()
     {
         $this->storage = new InMemoryKeyValueStorage();
     }
 
     public function testSet()
     {
-        $this->storage->set('time', '17:00');
-        $this->assertEquals('17:00', $this->storage->get('time'));
+        $this->storage->set('test', 'data');
 
-        $this->storage->set('time', '18:01');
-        $this->assertEquals('18:01', $this->storage->get('time'));
+        $this->assertEquals('data', $this->storage->get('test'));
     }
 
     public function testGet()
     {
-        $this->storage->set('answers', [11, 67, 89]);
+        $this->storage->set('test', 'data');
 
-        $this->assertEquals([11, 67, 89], $this->storage->get('answers'));
-        $this->assertEquals(null, $this->storage->get('undefined'));
+        $this->assertEquals('data', $this->storage->get('test'));
+        $this->assertNull($this->storage->get('unknown'));
     }
 
     public function testHas()
     {
-        $this->storage->set('version', '3.0-beta');
+        $this->storage->set('test', 'data');
 
-        $this->assertEquals(true, $this->storage->has('version'));
-        $this->assertEquals(false, $this->storage->has('undefined'));
+        $this->assertTrue($this->storage->has('test'));
+        $this->assertFalse($this->storage->has('unknown'));
     }
 
-    public function testRemove()
+    /**
+     * @dataProvider removeDataProvider
+     */
+    public function testRemove($key, $data)
     {
-        $this->storage->set('logs_dir', 'var/logs');
-        $this->storage->remove('logs_dir');
+        $this->storage->set($key, $data);
 
-        $this->assertEquals(false, $this->storage->has('logs_dir'));
+        $this->storage->remove($key);
+
+        $this->assertFalse($this->storage->has($key));
     }
 
     public function testClear()
     {
-        $this->storage->set('pi', \pi());
+        $this->storage->set('first', 1);
+        $this->storage->set('second', 2);
+        $this->storage->set('third', 3);
+
         $this->storage->clear();
 
-        $this->assertEquals(null, $this->storage->get('pi'));
+        $this->assertFalse($this->storage->has('first'));
+        $this->assertFalse($this->storage->has('second'));
+        $this->assertFalse($this->storage->has('third'));
+    }
+
+    public function removeDataProvider()
+    {
+        /*return [
+            ['a', 1],
+            ['b', 2],
+            ['c', 3],
+        ];*/
+
+        yield ['a', 1];
+        yield ['b', 2];
+        yield ['c', 3];
     }
 }

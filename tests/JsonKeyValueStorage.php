@@ -4,7 +4,7 @@ namespace Greeflas\Storage\Tests;
 
 use Greeflas\Storage\JsonKeyValueStorage;
 
-class JsonKeyValueStorageTest extends TestCase
+class JsonKeyValueStorage extends TestCase
 {
     private $storage;
 

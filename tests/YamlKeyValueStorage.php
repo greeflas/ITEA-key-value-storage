@@ -4,7 +4,7 @@ namespace Greeflas\Storage\Tests;
 
 use Greeflas\Storage\YamlKeyValueStorage;
 
-class YamlKeyValueStorageTest extends TestCase
+class YamlKeyValueStorage extends TestCase
 {
     private $storage;
 
