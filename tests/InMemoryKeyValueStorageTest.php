@@ -22,7 +22,11 @@ class InMemoryKeyValueStorageTest extends TestCase
     {
         $this->storage->set('test', 'data');
 
-        self::assertEquals('data', $this->storage->get('test'));
+        self::assertEquals(
+            'data',
+            $this->storage->get('test'),
+            'Method should save value to the storage'
+        );
     }
 
     public function testGet()
@@ -30,7 +34,7 @@ class InMemoryKeyValueStorageTest extends TestCase
         $this->storage->set('test', 'data');
 
         self::assertEquals('data', $this->storage->get('test'));
-        self::assertNull($this->storage->get('unknown'));
+        self::assertNull($this->storage->get('unknown'), 'If key does not exist - method should return null');
     }
 
     public function testHas()
@@ -44,7 +48,7 @@ class InMemoryKeyValueStorageTest extends TestCase
     /**
      * @dataProvider removeDataProvider
      */
-    public function testRemove($key, $data)
+    public function testRemove(string $key, int $data)
     {
         $this->storage->set($key, $data);
 
@@ -61,12 +65,15 @@ class InMemoryKeyValueStorageTest extends TestCase
 
         $this->storage->clear();
 
-        self::assertFalse($this->storage->has('first'));
+        self::assertFalse(
+            $this->storage->has('first'),
+            'Method clear should remove all values from the storage'
+        );
         self::assertFalse($this->storage->has('second'));
         self::assertFalse($this->storage->has('third'));
     }
 
-    public function removeDataProvider()
+    public function removeDataProvider(): iterable
     {
         /*return [
             ['a', 1],
