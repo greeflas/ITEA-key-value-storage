@@ -28,5 +28,8 @@
         "psr-4": {
             "Greeflas\\Storage\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit ./tests"
     }
 }

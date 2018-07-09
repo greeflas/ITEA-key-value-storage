@@ -22,23 +22,23 @@ class InMemoryKeyValueStorageTest extends TestCase
     {
         $this->storage->set('test', 'data');
 
-        $this->assertEquals('data', $this->storage->get('test'));
+        self::assertEquals('data', $this->storage->get('test'));
     }
 
     public function testGet()
     {
         $this->storage->set('test', 'data');
 
-        $this->assertEquals('data', $this->storage->get('test'));
-        $this->assertNull($this->storage->get('unknown'));
+        self::assertEquals('data', $this->storage->get('test'));
+        self::assertNull($this->storage->get('unknown'));
     }
 
     public function testHas()
     {
         $this->storage->set('test', 'data');
 
-        $this->assertTrue($this->storage->has('test'));
-        $this->assertFalse($this->storage->has('unknown'));
+        self::assertTrue($this->storage->has('test'));
+        self::assertFalse($this->storage->has('unknown'));
     }
 
     /**
@@ -50,7 +50,7 @@ class InMemoryKeyValueStorageTest extends TestCase
 
         $this->storage->remove($key);
 
-        $this->assertFalse($this->storage->has($key));
+        self::assertFalse($this->storage->has($key));
     }
 
     public function testClear()
@@ -61,9 +61,9 @@ class InMemoryKeyValueStorageTest extends TestCase
 
         $this->storage->clear();
 
-        $this->assertFalse($this->storage->has('first'));
-        $this->assertFalse($this->storage->has('second'));
-        $this->assertFalse($this->storage->has('third'));
+        self::assertFalse($this->storage->has('first'));
+        self::assertFalse($this->storage->has('second'));
+        self::assertFalse($this->storage->has('third'));
     }
 
     public function removeDataProvider()
